@@ -185,3 +185,27 @@ filterBtns.forEach((filterBtn) => {
         }
     })
 })
+
+//Comportement de Homepage après connexion administrateur
+const loginStatus = document.getElementById("login");
+const logoutStatus = document.getElementById("logout");
+const editModeBar = document.getElementById("admin-mode-bar");
+const editModeButton = document.querySelector(".modal-open");
+const editModeFilter = document.querySelector(".filters");
+
+
+if (JSON.parse(sessionStorage.getItem("isConnected"))) {
+    loginStatus.style.display = "none";
+    logoutStatus.style.display = "initial";
+    editModeBar.style.display = "flex";
+    editModeButton.style.display = "flex";
+    editModeFilter.style.display = "none";
+} else {
+    loginStatus.style.display = "initial";
+    logoutStatus.style.display = "none";
+    editModeBar.style.display = "none";
+    editModeButton.style.display = "none";
+    editModeFilter.style.display = "flex";
+
+}
+
