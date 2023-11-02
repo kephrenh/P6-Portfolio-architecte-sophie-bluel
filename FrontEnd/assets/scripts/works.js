@@ -190,7 +190,7 @@ filterBtns.forEach((filterBtn) => {
 const loginStatus = document.getElementById("login");
 const logoutStatus = document.getElementById("logout");
 const editModeBar = document.getElementById("admin-mode-bar");
-const editModeButton = document.querySelector(".modal-open");
+const editModeButton = document.querySelector(".modal-gallery-open");
 const editModeFilter = document.querySelector(".filters");
 
 
