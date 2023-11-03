@@ -190,7 +190,7 @@ filterBtns.forEach((filterBtn) => {
 const loginStatus = document.getElementById("login");
 const logoutStatus = document.getElementById("logout");
 const editModeBar = document.getElementById("admin-mode-bar");
-const editModeButton = document.querySelector(".modal-gallery-open");
+const editModeButton = document.querySelector(".portfolioButton");
 const editModeFilter = document.querySelector(".filters");
 
 
@@ -200,12 +200,16 @@ if (JSON.parse(sessionStorage.getItem("isConnected"))) {
     editModeBar.style.display = "flex";
     editModeButton.style.display = "flex";
     editModeFilter.style.display = "none";
+    modalGallery.style.display = "none";
+    modalPhoto.style.display = "none";
 } else {
     loginStatus.style.display = "initial";
     logoutStatus.style.display = "none";
     editModeBar.style.display = "none";
     editModeButton.style.display = "none";
     editModeFilter.style.display = "flex";
+    modalGallery.style.display = "none";
+    modalPhoto.style.display = "none";
 
 }
 

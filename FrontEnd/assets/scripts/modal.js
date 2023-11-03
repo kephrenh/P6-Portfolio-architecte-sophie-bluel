@@ -1,8 +1,31 @@
-// Affichage travaux dans modal gallery
-const modalGallery = document.getElementById("modal-gallery");
+// Ouvrir modale galérie
+const modalGallery = document.getElementById("modalGallery");
+const openModalGalleryBtn = document.getElementById("openModalGallery");
 
-const galleryModal = document.querySelector(".gallery-modal");
+openModalGalleryBtn.addEventListener("click", (e)=> {
+    e.preventDefault();
+    modalGallery.showModal();
+    modalGallery.style.display = "flex";
 
+    modalPhoto.style.display = "none";
+
+    modalGallery.removeAttribute("aria-hidden");
+})
+
+// Fermer modale galérie
+const closeModalGalleryBtn = document.querySelector(".closeModalGallery");
+
+closeModalGalleryBtn.addEventListener("click", (e)=> {
+    e.preventDefault();
+    modalGallery.close();
+    modalGallery.style.display = "none";
+
+    modalGallery.setAttribute("aria-hidden", "true");
+
+})
+
+// Ajout des travaux à la modale galérie
+const galleryModal = document.querySelector(".galleryModal");
 fetch(apiUrl)
     .then(response => response.json())  //conversion en json
     .then(json => addModalFigure(json))    //affichage des travaux
@@ -13,15 +36,15 @@ function addModalFigure(works) {
     works.forEach((work) => {
 
         const figure = document.createElement("figure");
-        figure.classList.add("gallery-modal-figure");
+        figure.classList.add("galleryModalFigure");
 
         const figureImg = document.createElement("img")
         figureImg.src = work.imageUrl;
         figureImg.alt = work.title;
-        figureImg.classList.add("gallery-modal-image");
+        figureImg.classList.add("galleryModalFigureImage");
 
         const figureDeleteButton = document.createElement("button")
-        figureDeleteButton.classList.add("delete-figure");
+        figureDeleteButton.classList.add("galleryModalFigureDelete");
 
         const figureDeleteIcon = document.createElement("i");
         figureDeleteIcon.classList.add("fa-solid");
@@ -39,88 +62,49 @@ function addModalFigure(works) {
     })
 }
 
-// Ouvrir Modal
-let modal = null;
+// Ouvrir modale photo
+const modalPhoto = document.getElementById("modalPhoto");
+const openModalPhotoBtn = document.getElementById("addPhotoButton");
 
-const openModalButton = document.querySelector(".modal-gallery-open");
-
-const openModal = (e)=> {
+openModalPhotoBtn.addEventListener("click", (e)=> {
     e.preventDefault();
+    modalPhoto.showModal();
+    modalGallery.close(); 
 
-    modal = document.getElementById("modal");
-    const modalGallery = document.getElementById("modal-gallery");
-
-    modal.style.display = null;
-    modalGallery.style.display = "flex";
-
-    modal.removeAttribute("aria-hidden");
-    modal.setAttribute("aria-modal", "true");
-}
-openModalButton.addEventListener("click", openModal)
-
-// Fermer Modal
-const closeModalButton = document.querySelector(".modal-gallery-close");
-
-const closeModal = (e)=> {
-    e.preventDefault();
-
-    modal = document.getElementById("modal");
-    modal.style.display = "none";
-
-    modal.setAttribute("aria-hidden", "true");
-    modal.removeAttribute("aria-modal");
-}
-closeModalButton.addEventListener("click", closeModal);
-
-// Ouvrir Modal Photo
-const openModalPhotoButton = document.querySelector(".modal-gallery-button");
-
-const openModalPhoto = (e)=> {
-    e.preventDefault();
-
-    const modalGallery = document.getElementById("modal-gallery")
-    modalPhoto = document.getElementById("modal-photo");
-
-    modalPhoto.style.display = null;
-    modalGallery.style.display ="none";
-
-    modalPhoto.removeAttribute("aria-hidden");
-    modalPhoto.setAttribute("aria-modal", "true");
-}
-openModalPhotoButton.addEventListener("click", openModalPhoto);
-
-// Fermer Modal Photo
-const closeModalPhotoButton = document.querySelector(".modal-photo-close");
-
-const closeModalPhoto = (e)=> {
-    e.preventDefault();
-
-    const modalGallery = document.getElementById("modal-gallery")
-    const modal = document.getElementById("modal");
-    modalPhoto = document.getElementById("modal-photo");
-
-    modalPhoto.style.display = "none";
-    modal.style.display = "none";
+    modalPhoto.style.display = "flex";
     modalGallery.style.display = "none";
 
-    modalPhoto.setAttribute("aria-hidden", "true");
-    modalPhoto.removeAttribute("aria-modal");
-}
-closeModalPhotoButton.addEventListener("click", closeModalPhoto);
+    modalPhoto.removeAttribute("aria-hidden");
+})
 
-// Retour de Modal Photo à Modal Gallery
-const backToModalGalleryButton = document.querySelector(".back-modal-gallery");
+// Fermer modale galérie
+const closeModalPhotoBtn = document.querySelector(".modalPhotoClose");
 
-const backToModalGallery = (e)=> {
+closeModalPhotoBtn.addEventListener("click", (e)=> {
     e.preventDefault();
 
-    modalPhoto = document.getElementById("modal-photo");
-    const modalGallery = document.getElementById("modal-gallery")
+    modalPhoto.close();
+    modalGallery.close();
+    
+    modalPhoto.style.display = "none";
+
+    modalPhoto.setAttribute("aria-hidden", "true");
+    modalGallery.style.display = "none";
+
+})
+
+// Passer de modale photo à modale galérie
+const backModalGalleryBtn = document.querySelector(".backModalGallery");
+
+backModalGalleryBtn.addEventListener("click", (e)=> {
+    e.preventDefault();
+
+    modalPhoto.close();
+    modalGallery.showModal();
 
     modalPhoto.style.display = "none";
-    modalPhoto.removeAttribute("aria-hidden");
-    modalPhoto.setAttribute("aria-modal", "true");
-
     modalGallery.style.display = "flex";
-}
-backToModalGalleryButton.addEventListener("click", backToModalGallery);
+
+    modalPhoto.setAttribute("aria-hidden", "true");
+    modalGallery.removeAttribute("aria-hidden");
+})
