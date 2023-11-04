@@ -108,3 +108,26 @@ backModalGalleryBtn.addEventListener("click", (e)=> {
     modalPhoto.setAttribute("aria-hidden", "true");
     modalGallery.removeAttribute("aria-hidden");
 })
+
+// Ajout image preview
+const imageInput = document.getElementById("image");
+
+const iconInput = document.querySelector(".fa-image");
+
+const pTag = document.querySelector(".modalPhotoMain p");
+const labelTag = document.querySelector(".modalPhotoMain label");
+
+const previewImage = document.getElementById("previewImage");
+
+imageInput.addEventListener("change", (e)=> {
+    if(e.target.files.length > 0) {
+        previewImage.src = URL.createObjectURL(e.target.files[0]);
+        previewImage.style.display = "block";
+
+        pTag.style.display = "none";
+        labelTag.style.display = "none";
+        iconInput.style.display = "none";
+    }
+
+    imageInput.value = null;
+});

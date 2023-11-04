@@ -538,6 +538,12 @@ footer nav ul {
 	color: #CBD6DC;
 }
 
+#previewImage {
+	display: none;
+	width: 129px;
+	height: 100%;
+}
+
 .modalPhotoMain span {
 	display: flex;
 	flex-direction: column;
