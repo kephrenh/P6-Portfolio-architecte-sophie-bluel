@@ -19,9 +19,23 @@ closeModalGalleryBtn.addEventListener("click", (e)=> {
     e.preventDefault();
     modalGallery.close();
     modalGallery.style.display = "none";
-
     modalGallery.setAttribute("aria-hidden", "true");
 })
+
+// Fermeture modale photo avec un clic en dehors de la modale
+modalGallery.addEventListener("click", e => {
+    const modalGalleryDimensions = modalGallery.getBoundingClientRect()
+    if (
+      e.clientX < modalGalleryDimensions.left ||
+      e.clientX > modalGalleryDimensions.right ||
+      e.clientY < modalGalleryDimensions.top ||
+      e.clientY > modalGalleryDimensions.bottom
+    ) {
+      modalGallery.close()
+      modalGallery.style.display = "none";
+      modalGallery.setAttribute("aria-hidden", "true");
+    }
+  })
 
 // Ajout des travaux à la modale galérie
 const galleryModal = document.querySelector(".galleryModal");
@@ -91,11 +105,10 @@ closeModalPhotoBtn.addEventListener("click", (e)=> {
     e.preventDefault();
 
     modalPhoto.close();
-    modalGallery.close();
-    
     modalPhoto.style.display = "none";
-
     modalPhoto.setAttribute("aria-hidden", "true");
+
+    modalGallery.close();
     modalGallery.style.display = "none";
 
     previewImage.style.display = "none"
@@ -107,6 +120,40 @@ closeModalPhotoBtn.addEventListener("click", (e)=> {
 
     inputTitle.value = "";
     select.selectedIndex = 0;
+})
+
+// Fermeture modale photo avec un clic en dehors de la modale
+modalPhoto.addEventListener("click", e => {
+    const modalPhotoDimensions = modalPhoto.getBoundingClientRect()
+    if (
+      e.clientX < modalPhotoDimensions.left ||
+      e.clientX > modalPhotoDimensions.right ||
+      e.clientY < modalPhotoDimensions.top ||
+      e.clientY > modalPhotoDimensions.bottom
+    ) {
+        modalPhoto.close();
+        modalPhoto.style.display = "none";
+        modalPhoto.setAttribute("aria-hidden", "true");
+
+        modalGallery.close();
+        modalGallery.style.display = "none";
+
+        submitBtn.disabled = true;
+    }
+  })
+
+//   Fermeture des modales avec Escape
+window.addEventListener("keydown", (e)=> {
+    if(e.key === "Escape" || e.key === "Esc") {
+        modalPhoto.close();
+        modalPhoto.style.display = "none";
+        modalPhoto.setAttribute("aria-hidden", "true");
+
+        modalGallery.close();
+        modalGallery.style.display = "none";
+
+        submitBtn.disabled = true;
+    }
 })
 
 //Retour modale galérie
