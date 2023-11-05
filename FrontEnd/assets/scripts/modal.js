@@ -21,7 +21,6 @@ closeModalGalleryBtn.addEventListener("click", (e)=> {
     modalGallery.style.display = "none";
 
     modalGallery.setAttribute("aria-hidden", "true");
-
 })
 
 // Ajout des travaux à la modale galérie
@@ -75,9 +74,17 @@ openModalPhotoBtn.addEventListener("click", (e)=> {
     modalGallery.style.display = "none";
 
     modalPhoto.removeAttribute("aria-hidden");
+
+    previewImage.style.display = "none"
+    pTag.style.display = "initial";
+    labelTag.style.display = "initial";
+    iconInput.style.display = "initial";
+
+    inputTitle.value = "";
+    select.selectedIndex = 0;
 })
 
-// Fermer modale galérie
+// Fermer modale photo
 const closeModalPhotoBtn = document.querySelector(".modalPhotoClose");
 
 closeModalPhotoBtn.addEventListener("click", (e)=> {
@@ -91,9 +98,18 @@ closeModalPhotoBtn.addEventListener("click", (e)=> {
     modalPhoto.setAttribute("aria-hidden", "true");
     modalGallery.style.display = "none";
 
+    previewImage.style.display = "none"
+    pTag.style.display = "initial";
+    labelTag.style.display = "initial";
+    iconInput.style.display = "initial";
+
+    submitBtn.disabled = true;
+
+    inputTitle.value = "";
+    select.selectedIndex = 0;
 })
 
-// Passer de modale photo à modale galérie
+//Retour modale galérie
 const backModalGalleryBtn = document.querySelector(".backModalGallery");
 
 backModalGalleryBtn.addEventListener("click", (e)=> {
@@ -107,6 +123,16 @@ backModalGalleryBtn.addEventListener("click", (e)=> {
 
     modalPhoto.setAttribute("aria-hidden", "true");
     modalGallery.removeAttribute("aria-hidden");
+
+    previewImage.style.display = "none"
+    pTag.style.display = "initial";
+    labelTag.style.display = "initial";
+    iconInput.style.display = "initial";
+
+    submitBtn.disabled = true;
+
+    inputTitle.value = "";
+    select.selectedIndex = 0;
 })
 
 // Ajout image preview
@@ -120,7 +146,7 @@ const labelTag = document.querySelector(".modalPhotoMain label");
 const previewImage = document.getElementById("previewImage");
 
 imageInput.addEventListener("change", (e)=> {
-    if(e.target.files.length > 0) {
+    if(e.target.files.length > 0 ) {
         previewImage.src = URL.createObjectURL(e.target.files[0]);
         previewImage.style.display = "block";
 
@@ -131,3 +157,52 @@ imageInput.addEventListener("change", (e)=> {
 
     imageInput.value = null;
 });
+
+// Activation bouton Valider
+const modalPhotoForm = document.querySelector(".modalPhotoForm");
+const submitBtn = document.getElementById("submitBtn");
+
+submitBtn.disabled = true;
+submitBtn.ariaDisabled = true;
+
+const inputTitle = document.getElementById("title");
+const select = document.getElementById("select");
+
+function checkLength() {    //Vérifier si
+    if(inputTitle.value.length > 0) {
+        return true;
+    } else {
+        return false
+    }
+}
+
+function checkSelect() {
+    if(select.selectedIndex !== 0) {
+        return true;
+    } else {
+        return false
+    }
+}
+
+
+function checkImage() {
+    if(previewImage.style.display !== "none") {
+        return true;
+    } else {
+        return false
+    }
+}
+
+const activateSubmitButton = (e)=> {
+    e.preventDefault();
+    if(checkSelect() === true && checkLength() === true && checkImage() === true) {
+        submitBtn.disabled = false;
+        submitBtn.ariaDisabled = false;
+    } else {
+        submitBtn.disabled = true;
+        submitBtn.ariaDisabled = true;
+    }
+}
+modalPhotoForm.addEventListener("change", activateSubmitButton);
+
+
