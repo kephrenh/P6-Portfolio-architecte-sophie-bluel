@@ -568,7 +568,7 @@ footer nav ul {
 	border: none;
 	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);}
 
-.modalPhotoForm label {
+.modalPhotoForm label[for=title], label[for=select] {
 	width: 100%;
 	color: #3D3D3D;
 	font-family: Work Sans;
