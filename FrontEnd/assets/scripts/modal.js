@@ -135,9 +135,6 @@ modalPhoto.addEventListener("click", e => {
         modalPhoto.style.display = "none";
         modalPhoto.setAttribute("aria-hidden", "true");
 
-        modalGallery.close();
-        modalGallery.style.display = "none";
-
         submitBtn.disabled = true;
     }
   })
@@ -163,12 +160,11 @@ backModalGalleryBtn.addEventListener("click", (e)=> {
     e.preventDefault();
 
     modalPhoto.close();
-    modalGallery.showModal();
-
     modalPhoto.style.display = "none";
-    modalGallery.style.display = "flex";
-
     modalPhoto.setAttribute("aria-hidden", "true");
+
+    modalGallery.showModal();
+    modalGallery.style.display = "flex";
     modalGallery.removeAttribute("aria-hidden");
 
     previewImage.style.display = "none"
