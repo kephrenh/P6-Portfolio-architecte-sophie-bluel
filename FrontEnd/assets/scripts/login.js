@@ -1,36 +1,43 @@
-const apiUrlLogin = "http://localhost:5678/api/users/login";
+const loginUrl = "http://localhost:5678/api/users/login";
 
-const email = document.getElementById("email");
-const password = document.getElementById("password");
+const form = {
+    email : document.getElementById("email"),
+    password : document.getElementById("password")
+}
+
+const errorMessage = document.querySelector(".errorMessage");
 const submitUser = document.getElementById("submit-user");
+const bearerAuth = sessionStorage.getItem("BearerAuth");
 
 let user = {
-    email: email.value,
-    password: password.value,
+    email: form.email.value,
+    password: form.password.value
 }
 
 const payload = JSON.stringify(user);
 
-const validate = (e) => {
-    e.preventDefault();     //Empêche actualisation de la page
+const login = (e)=> {
+    e.preventDefault();
 
-    fetch(apiUrlLogin, {
+    fetch(loginUrl, {
         method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: payload
+        headers: {
+            "Accept" : "application/json",
+            "Content-type" : "application/json"},
+        body: payload,
     })
-    .then((response) => response.json())
-    .then((data) => {
-        sessionStorage.setItem("token", data.token);
-
-        if (data.error) {
-            alert("Error username or password");
-        } else {
-            sessionStorage.setItem("isConnected", JSON.stringify(true));
-            window.location.replace("index.html");
+    .then(response => {
+        if(response.ok) {
+            return response.json();
+        } else if(response.status === 404 || response.status === 401) {
+            throw new Error("Données d'identifications incorrectes");
         }
     })
-};
-
-submitUser.addEventListener("click", validate);
-
+    .then(body => {
+        sessionStorage.setItem("bearerAuth", JSON.stringify(body));
+        window.location.replace("index.html")
+    })
+}
+submitUser.addEventListener("click", login);    
+        
+        
