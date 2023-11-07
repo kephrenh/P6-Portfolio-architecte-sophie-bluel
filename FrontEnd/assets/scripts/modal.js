@@ -10,6 +10,7 @@ openModalGalleryBtn.addEventListener("click", (e)=> {
     modalPhoto.style.display = "none";
 
     modalGallery.removeAttribute("aria-hidden");
+    modalGallery.setAttribute("aria-modal", "true");
 })
 
 // Fermer modale galérie
@@ -20,6 +21,8 @@ closeModalGalleryBtn.addEventListener("click", (e)=> {
     modalGallery.close();
     modalGallery.style.display = "none";
     modalGallery.setAttribute("aria-hidden", "true");
+    modalGallery.removeAttribute("aria-modal");
+
 })
 
 // Fermeture modale photo avec un clic en dehors de la modale
@@ -34,6 +37,7 @@ modalGallery.addEventListener("click", e => {
       modalGallery.close()
       modalGallery.style.display = "none";
       modalGallery.setAttribute("aria-hidden", "true");
+      modalGallery.removeAttribute("aria-modal");
     }
   })
 
@@ -57,7 +61,7 @@ function addModalFigure(works) {
         figureImg.classList.add("galleryModalFigureImage");
 
         const figureDeleteButton = document.createElement("button")
-        figureDeleteButton.classList.add("galleryModalFigureDelete");
+        figureDeleteButton.classList.add("figureDeleteBtn");
 
         const figureDeleteIcon = document.createElement("i");
         figureDeleteIcon.classList.add("fa-solid");
@@ -86,8 +90,13 @@ openModalPhotoBtn.addEventListener("click", (e)=> {
 
     modalPhoto.style.display = "flex";
     modalGallery.style.display = "none";
+    modalGallery.setAttribute("aria-hidden", "true");
+    modalGallery.removeAttribute("aria-modal");
+
 
     modalPhoto.removeAttribute("aria-hidden");
+    modalPhoto.setAttribute("aria-modal", "true");
+
 
     previewImage.style.display = "none"
     pTag.style.display = "initial";
@@ -107,9 +116,14 @@ closeModalPhotoBtn.addEventListener("click", (e)=> {
     modalPhoto.close();
     modalPhoto.style.display = "none";
     modalPhoto.setAttribute("aria-hidden", "true");
+    modalPhoto.removeAttribute("aria-modal");
+
 
     modalGallery.close();
     modalGallery.style.display = "none";
+    modalGallery.setAttribute("aria-hidden", "true");
+    modalGallery.removeAttribute("aria-modal");
+
 
     previewImage.style.display = "none"
     pTag.style.display = "initial";
@@ -126,14 +140,15 @@ closeModalPhotoBtn.addEventListener("click", (e)=> {
 modalPhoto.addEventListener("click", e => {
     const modalPhotoDimensions = modalPhoto.getBoundingClientRect()
     if (
-      e.clientX < modalPhotoDimensions.left ||
-      e.clientX > modalPhotoDimensions.right ||
-      e.clientY < modalPhotoDimensions.top ||
-      e.clientY > modalPhotoDimensions.bottom
+        e.clientX < modalPhotoDimensions.left ||
+        e.clientX > modalPhotoDimensions.right ||
+        e.clientY < modalPhotoDimensions.top ||
+        e.clientY > modalPhotoDimensions.bottom
     ) {
         modalPhoto.close();
         modalPhoto.style.display = "none";
         modalPhoto.setAttribute("aria-hidden", "true");
+        modalPhoto.removeAttribute("aria-modal");
 
         submitBtn.disabled = true;
     }
@@ -145,9 +160,12 @@ window.addEventListener("keydown", (e)=> {
         modalPhoto.close();
         modalPhoto.style.display = "none";
         modalPhoto.setAttribute("aria-hidden", "true");
+        modalPhoto.removeAttribute("aria-modal");
 
         modalGallery.close();
         modalGallery.style.display = "none";
+        modalGallery.setAttribute("aria-hidden", "true");
+        modalGallery.removeAttribute("aria-modal");
 
         submitBtn.disabled = true;
     }
@@ -162,10 +180,12 @@ backModalGalleryBtn.addEventListener("click", (e)=> {
     modalPhoto.close();
     modalPhoto.style.display = "none";
     modalPhoto.setAttribute("aria-hidden", "true");
+    modalPhoto.removeAttribute("aria-modal");
 
     modalGallery.showModal();
     modalGallery.style.display = "flex";
     modalGallery.removeAttribute("aria-hidden");
+    modalGallery.setAttribute("aria-modal", "true");
 
     previewImage.style.display = "none"
     pTag.style.display = "initial";
@@ -227,7 +247,6 @@ function checkSelect() {
     }
 }
 
-
 function checkImage() {
     if(previewImage.style.display !== "none") {
         return true;
@@ -247,5 +266,4 @@ const activateSubmitButton = (e)=> {
     }
 }
 modalPhotoForm.addEventListener("change", activateSubmitButton);
-
 
