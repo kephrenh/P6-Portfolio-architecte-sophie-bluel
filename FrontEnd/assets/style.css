@@ -308,6 +308,7 @@ footer nav ul {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	gap: 5px;
 }
 
 #login input {
@@ -354,6 +355,19 @@ footer nav ul {
 	line-height: normal;
 	margin: 37px 0 28px 0;
 }
+
+.loginErrorMessage {
+	width: 379px;
+	height: 30px;
+	font-family: "Syne";
+	display: none;
+	justify-content: flex-start;
+	align-items: center;
+	color: red;
+	padding: 5px;
+	margin-top: 15px;
+}
+
 #logout {
 	display: none;
 }
@@ -457,7 +471,7 @@ footer nav ul {
 	object-fit: cover;
 }
 
-.galleryModalFigureDelete {
+.figureDeleteBtn {
 	width: 17px;
 	height: 17px;
 	background: #000;

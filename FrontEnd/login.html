@@ -29,11 +29,12 @@
 <main>
 	<section id="login">
 		<h1>Log In</h1>
-		<form action="#" method="#">
+		<form action="#" method="POST" id="loginForm">
 			<label for="email">E-mail</label>
-			<input type="email" name="email" id="email">
+			<input type="email" name="email" id="email" autocomplete="off" required>
 			<label for="password">Mot de passe</label>
             <input type="password" name="password" id="password" required>
+			<p class="loginErrorMessage">Invalid email address and/or password</p>
 			<input type="submit" value="Se connecter" id="submit-user" class="submit-btn">
             <a href="#">Mot de passe oublié</a>
 		</form>

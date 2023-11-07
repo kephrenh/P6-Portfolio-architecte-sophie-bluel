@@ -194,7 +194,7 @@ const editModeButton = document.querySelector(".portfolioButton");
 const editModeFilter = document.querySelector(".filters");
 
 
-if (JSON.parse(sessionStorage.getItem("isConnected"))) {
+if (JSON.parse(sessionStorage.getItem("bearerAuth"))) {
     loginStatus.style.display = "none";
     logoutStatus.style.display = "initial";
     editModeBar.style.display = "flex";
@@ -212,4 +212,6 @@ if (JSON.parse(sessionStorage.getItem("isConnected"))) {
     modalPhoto.style.display = "none";
 
 }
+
+
 
