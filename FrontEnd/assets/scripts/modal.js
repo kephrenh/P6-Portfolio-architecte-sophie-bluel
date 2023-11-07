@@ -41,6 +41,10 @@ modalGallery.addEventListener("click", e => {
     }
   })
 
+  const stopPropagation = (e)=> {
+    e.stopPropagation();
+  }
+
 // Ajout des travaux à la modale galérie
 const galleryModal = document.querySelector(".galleryModal");
 fetch(apiUrl)
@@ -118,12 +122,10 @@ closeModalPhotoBtn.addEventListener("click", (e)=> {
     modalPhoto.setAttribute("aria-hidden", "true");
     modalPhoto.removeAttribute("aria-modal");
 
-
     modalGallery.close();
     modalGallery.style.display = "none";
     modalGallery.setAttribute("aria-hidden", "true");
     modalGallery.removeAttribute("aria-modal");
-
 
     previewImage.style.display = "none"
     pTag.style.display = "initial";
@@ -266,4 +268,5 @@ const activateSubmitButton = (e)=> {
     }
 }
 modalPhotoForm.addEventListener("change", activateSubmitButton);
+modalPhotoForm.select.addEventListener("click", stopPropagation);
 
