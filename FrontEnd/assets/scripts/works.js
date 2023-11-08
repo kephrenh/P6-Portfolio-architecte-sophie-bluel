@@ -186,6 +186,17 @@ filterBtns.forEach((filterBtn) => {
     })
 })
 
+// Logout
+const handleLogout = () => {
+    window.sessionStorage.clear();
+    window.location.reload(true);
+    window.location.replace('/');
+  };
+const logoutButton = document.querySelector(".logout");
+logoutButton.addEventListener("click", handleLogout);
+
+
+
 //Comportement de Homepage après connexion administrateur
 const loginStatus = document.querySelector(".login");
 const logoutStatus = document.querySelector(".logout");
