@@ -1,5 +1,7 @@
 const loginUrl = "http://localhost:5678/api/users/login";
 
+
+
 const form = {
     email : document.getElementById("email"),
     password : document.getElementById("password")
@@ -13,6 +15,7 @@ let user = {
     email: form.email.value,
     password: form.password.value
 }
+console.log(user);
 
 const payload = JSON.stringify(user);
 
@@ -33,11 +36,11 @@ const login = (e)=> {
             throw new Error("Données d'identifications incorrectes");
         }
     })
-    .then(body => {
-        sessionStorage.setItem("bearerAuth", JSON.stringify(body));
+    .then(data => {
+        sessionStorage.setItem("bearerAuth", JSON.stringify(data));
         window.location.replace("index.html")
+        console.log(data)
     })
 }
 submitUser.addEventListener("click", login);    
-        
         
