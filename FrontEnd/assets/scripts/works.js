@@ -187,8 +187,8 @@ filterBtns.forEach((filterBtn) => {
 })
 
 //Comportement de Homepage après connexion administrateur
-const loginStatus = document.getElementById("login");
-const logoutStatus = document.getElementById("logout");
+const loginStatus = document.querySelector(".login");
+const logoutStatus = document.querySelector(".logout");
 const editModeBar = document.getElementById("admin-mode-bar");
 const editModeButton = document.querySelector(".portfolioButton");
 const editModeFilter = document.querySelector(".filters");
