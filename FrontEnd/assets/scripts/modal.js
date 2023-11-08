@@ -269,4 +269,3 @@ const activateSubmitButton = (e)=> {
 }
 modalPhotoForm.addEventListener("change", activateSubmitButton);
 modalPhotoForm.select.addEventListener("click", stopPropagation);
-
