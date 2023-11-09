@@ -471,7 +471,7 @@ footer nav ul {
 	object-fit: cover;
 }
 
-.figureDeleteBtn {
+.trash-button {
 	width: 17px;
 	height: 17px;
 	background: #000;
@@ -582,7 +582,7 @@ footer nav ul {
 	border: none;
 	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);}
 
-.modalPhotoForm label[for=title], label[for=select] {
+.modalPhotoForm label[for=title], label[for=category] {
 	width: 100%;
 	color: #3D3D3D;
 	font-family: Work Sans;
@@ -592,7 +592,7 @@ footer nav ul {
 	line-height: normal;
 	margin: 20px 0 10px 0;}
 
-#select {
+#category {
 	width: 420px;
 	height: 51px;
 	background: #FFF;
