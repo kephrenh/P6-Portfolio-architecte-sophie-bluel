@@ -1,7 +1,5 @@
 const loginUrl = "http://localhost:5678/api/users/login";
 
-
-
 const form = {
     email : document.getElementById("email"),
     password : document.getElementById("password")
@@ -9,23 +7,22 @@ const form = {
 
 const errorMessage = document.querySelector(".errorMessage");
 const submitUser = document.getElementById("submit-user");
-const bearerAuth = sessionStorage.getItem("BearerAuth");
 
-let user = {
-    email: form.email.value,
-    password: form.password.value
-}
-console.log(user);
-
-const payload = JSON.stringify(user);
 
 const login = (e)=> {
     e.preventDefault();
 
+    let user = {
+        email: form.email.value,
+        password: form.password.value
+    }
+    console.log(user);
+    
+    const payload = JSON.stringify(user);
+    
     fetch(loginUrl, {
         method: "POST",
         headers: {
-            "Accept" : "application/json",
             "Content-type" : "application/json"},
         body: payload,
     })
