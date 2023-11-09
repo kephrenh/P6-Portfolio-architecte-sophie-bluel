@@ -37,7 +37,7 @@ const login = (e)=> {
         }
     })
     .then(data => {
-        window.sessionStorage.setItem("token", data.token);
+        sessionStorage.setItem("token", data.token);
         window.location.replace("index.html")
         console.log(data)
     })

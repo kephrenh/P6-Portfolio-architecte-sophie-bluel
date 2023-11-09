@@ -96,7 +96,7 @@ function addModalFigure(works) {
 }
 
 // Supprimer un projet
-const token = window.sessionStorage.getItem("token");
+const token = sessionStorage.getItem("token");
     console.table(token);
 
 function deleteWork(workId) {
