@@ -58,18 +58,18 @@
 			<i class="fa-solid fa-xmark modalPhotoClose"></i>
 		</div>
 		<h2 class="modalPhotoTitle">Ajout photo</h2>
-		<form method="POST" class="modalPhotoForm">
+		<form enctype="multipart/form-data" method="POST" class="modalPhotoForm">
 			<div class="modalPhotoMain">
 				<i class="fa-regular fa-image"></i>
 				<img src="#" alt="preview image" id="previewImage">
-				<input type="file" name="image" id="image" accept="image/*">
-				<label for="image">+ Ajouter photo</label>
+				<input type="file" name="file" id="file" accept="image/*">
+				<label for="file">+ Ajouter photo</label>
 				<p>jpg, png : 4mo max</p>
 			</div>
 			<label for="title">Titre</label>
 			<input type="text" name="title" id="title">
-			<label for="select">Catégorie</label>
-			<select value="categories" id="select">
+			<label for="category">Catégorie</label>
+			<select value="categories" id="category">
 				<option selected value="" class="option"></option>
 				<option value="objets" class="option">Objets</option>
 				<option value="appartements" class="option">Appartements</option>
