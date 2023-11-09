@@ -52,6 +52,8 @@ modalGallery.addEventListener("click", (e) => {
 
 // Ajouter les travaux à la modale galérie
 const galleryModal = document.querySelector(".galleryModal");
+const apiUrl = "http://www.localhost:5678/api/works";
+
 fetch(apiUrl)
     .then(response => response.json())  //conversion en json
     .then(json => addModalFigure(json))    //affichage des travaux
@@ -97,10 +99,9 @@ function addModalFigure(works) {
 
 // Supprimer un projet
 const token = sessionStorage.getItem("token");
-    console.table(token);
 
 function deleteWork(workId) {
-    const token = window.sessionStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     console.log(token);
 
     
@@ -183,7 +184,7 @@ closeModalPhotoBtn.addEventListener("click", (e)=> {
     submitBtn.disabled = true;
 
     inputTitle.value = "";
-    select.selectedIndex = 0;
+    category.selectedIndex = 0;
 })
 
 // Fermeture modale photo avec un clic en dehors de la modale
@@ -320,3 +321,84 @@ const activateSubmitButton = (e)=> {
 modalPhotoForm.addEventListener("change", activateSubmitButton);
 modalPhotoForm.category.addEventListener("click", stopPropagation);
 
+// Ajouter un nouveau projet
+submitBtn.addEventListener("click", (e)=> {
+    e.preventDefault();
+
+    const title = document.getElementById("title").value;
+    const category = document.getElementById("category").value;
+    const image = document.getElementById("file").value;
+
+    if(image.size > 4 * 1024 * 1024) {
+        alert("La taille de l'image ne doit pas dépasser 4 mo.")
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("category", category);
+    formData.append("image", image);
+
+    fetch("http://www.localhost:5678/api/works", {
+        method: "POST",
+        body: formData,
+        headers: {
+            "Content-type" : "application/json",
+            "Authorization" : `Bearer ${token}`
+        }
+    })
+    .then(response => (response.json()))
+    .then(json => {
+        addNewWork(json);
+        alert("New work added")
+
+    })
+    .catch(error => console.log(error));
+})
+
+function addNewWork(newPicture) {
+    const figure1 = document.createElement("figure");
+    figure1.classList.add("galleryModalFigure");
+
+    const figureImg1 = document.createElement("img")
+    figureImg1.src = newPicture.imageUrl;
+    figureImg1.alt = newPicture.title;
+    figureImg1.classList.add("galleryModalFigureImage");
+
+    const trashButton = document.createElement("button")
+    trashButton.classList.add("trash-button");
+
+    const trashIcon = document.createElement("i");
+    trashIcon.classList.add("fa-solid");
+    trashIcon.classList.add("fa-trash-can");
+    trashIcon.classList.add("trash-icon");
+
+    trashButton.appendChild(trashIcon);
+
+    figure1.setAttribute("data-id", newPicture.id);
+    figure1.setAttribute("category-id", newPicture.categoryId);
+
+    figure1.appendChild(figureImg1);
+    figure1.appendChild(trashButton);
+
+    galleryModal.appendChild(figure1);
+
+    const figure2 = document.createElement("figure");
+    figure2.classList.add("project");
+
+    const figureImg2 = document.createElement("img")
+    figureImg2.src = newPicture.imageUrl;
+    figureImg2.alt = newPicture.title;
+
+    const figureCap = document.createElement("figcaption");
+    figureCap.innerHTML = newPicture.title;
+
+    figure2.setAttribute("data-id", newPicture.id);
+    figure2.setAttribute("category-id", newPicture.categoryId);
+
+    figure2.appendChild(figureImg2);
+    figure2.appendChild(figureCap);
+
+    const gallery = document.querySelector(".gallery");
+    gallery.appendChild(figure2);
+}
