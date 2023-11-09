@@ -205,7 +205,7 @@ const editModeButton = document.querySelector(".portfolioButton");
 const editModeFilter = document.querySelector(".filters");
 
 
-if (JSON.parse(sessionStorage.getItem("bearerAuth"))) {
+if (sessionStorage.getItem("token")) {
     loginStatus.style.display = "none";
     logoutStatus.style.display = "initial";
     editModeBar.style.display = "flex";
