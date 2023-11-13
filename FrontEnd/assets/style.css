@@ -356,16 +356,36 @@ footer nav ul {
 	margin: 37px 0 28px 0;
 }
 
-.loginErrorMessage {
-	width: 379px;
-	height: 30px;
-	font-family: "Syne";
+.errorDialog {
 	display: none;
-	justify-content: flex-start;
+	flex-direction: column;
 	align-items: center;
-	color: red;
-	padding: 5px;
-	margin-top: 15px;
+	width: 350px;
+	height: 150px;
+	padding: 0;
+	border: none;
+	border-radius: 15px;
+	background: #ecfcfd;
+	gap: 10px;
+	padding: 20px;
+}
+
+.dialogTitle {
+	font-size: 20px;
+}
+
+.dividingLine {
+	width: 100%;
+	border-top: 1px solid #b3b3b3;
+	margin: 70px 0 0 0;
+}
+
+.dialogButton {
+	border: none;
+	font-size: xx-large;
+	font-weight: bolder;
+	color:#1D6154;
+	margin-top: 20px;
 }
 
 #logout {
@@ -545,6 +565,21 @@ footer nav ul {
 	background: #E8F1F6;
 	gap: 5px;
 	margin: 30px 0 10px 0;
+}
+
+.modalPhotoMain label {
+	width: 173px;
+	height: 36px;
+	border: none;
+	border-radius: 50px;
+	background: #CBD6DC;
+	color: #306685;
+	font-family: Work Sans;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 36px;
+	text-align: center;
 }
 
 .fa-image {
