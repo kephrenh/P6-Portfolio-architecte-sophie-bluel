@@ -22,9 +22,11 @@ function getWorks(works) {
         const figureImg = document.createElement("img")
         figureImg.src = work.imageUrl;
         figureImg.alt = work.title;
+        figureImg.classList.add("galleryImage");
 
         const figureCap = document.createElement("figcaption");
         figureCap.innerHTML = work.title;
+        figureCap.classList.add("figCaption");
 
         figure.setAttribute("data-id", work.id);
         figure.setAttribute("category-id", work.categoryId);
@@ -162,27 +164,18 @@ window.addEventListener("load", defaultFilter);
 filterBtns.forEach((filterBtn) => {
 
     filterBtn.addEventListener("click", () => {
-        console.log("clicked");
 
         filterBtns[0].classList.remove("btn_selected");
-        if (i === 1) {
-            filterBtn.classList.add("btn_selected");
-        }
+        if (i === 1) return filterBtn.classList.add("btn_selected");
 
         filterBtns[1].classList.remove("btn_selected");
-        if (i === 2) {
-            filterBtn.classList.add("btn_selected");
-        }
+        if (i === 2) return filterBtn.classList.add("btn_selected");
 
         filterBtns[2].classList.remove("btn_selected");
-        if (i === 3) {
-            filterBtn.classList.add("btn_selected");
-        }
+        if (i === 3) return filterBtn.classList.add("btn_selected");
 
         filterBtns[3].classList.remove("btn_selected");
-        if (i === 0) {
-            filterBtn.classList.add("btn_selected");
-        }
+        if (i === 0) return filterBtn.classList.add("btn_selected");
     })
 })
 
@@ -205,7 +198,7 @@ const editModeButton = document.querySelector(".portfolioButton");
 const editModeFilter = document.querySelector(".filters");
 
 
-if (sessionStorage.getItem("token")) {
+if (JSON.parse(sessionStorage.getItem("isLogged"))) {
     loginStatus.style.display = "none";
     logoutStatus.style.display = "initial";
     editModeBar.style.display = "flex";

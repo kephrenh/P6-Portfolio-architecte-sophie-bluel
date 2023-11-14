@@ -61,7 +61,7 @@
 		<form class="modalPhotoForm">
 			<div class="modalPhotoMain">
 				<i class="fa-regular fa-image"></i>
-				<img src="#" alt="preview image" id="previewImage">
+				<img alt="preview image" id="previewImage">
 				<input type="file" name="image" id="image" accept="image/*">
 				<label for="image">+ Ajouter photo</label>
 				<p>jpg, png : 4mo max</p>
@@ -70,16 +70,15 @@
 			<input type="text" name="title" id="title">
 			<label for="category">Catégorie</label>
 			<select id="category">
-				<option selected class="option"></option>
-				<option value="objets" class="option">Objets</option>
-				<option value="appartements" class="option">Appartements</option>
-				<option value="hôtels" class="option">Hôtels & restaurants</option>
+				<option value="0" selected disabled hidden class="option"></option>
+				<option value="1" class="option">Objets</option>
+				<option value="2" class="option">Appartements</option>
+				<option value="3" class="option">Hôtels & restaurants</option>
 			</select>
 			<div class="modalPhotoLine"></div>
 			<button type="submit" id="submitBtn">Valider</button>
 		</form>
 	</dialog>
-
 
 	<section id="portfolio">
 		<div class="portfolio-header">

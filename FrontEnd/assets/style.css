@@ -477,7 +477,7 @@ footer nav ul {
 	gap: 30px 10px;
 }
 
-.galleryModalFigure {
+.modalFigure {
 	width: 78px;
 	height: 104px;
 	display: flex;
@@ -485,7 +485,7 @@ footer nav ul {
 	position: relative;
 }
 
-.galleryModalFigureImage {
+.modalImage {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
