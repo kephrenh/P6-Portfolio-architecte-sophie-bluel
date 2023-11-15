@@ -8,33 +8,33 @@ const portfolio = document.getElementById("portfolio");
 const gallery = document.querySelector(".gallery");
 
 fetch(apiUrl)
-    .then(response => response.json())  //conversion en json
-    .then(json => getWorks(json))    //affichage des travaux
-    .catch(err => console.log("Request Failed", err))  //catch erreurs
+    .then(response => response.json())  
+    .then(json => getWorks(json))   
+    .catch(err => console.log("Request Failed", err))  
 
 function getWorks(works) {
 
     works.forEach((work) => {
 
-        const figure = document.createElement("figure");
-        figure.classList.add("project");
+    const figure = document.createElement("figure");
+    figure.classList.add("project");
 
-        const figureImg = document.createElement("img")
-        figureImg.src = work.imageUrl;
-        figureImg.alt = work.title;
-        figureImg.classList.add("galleryImage");
+    const figureImg = document.createElement("img")
+    figureImg.src = work.imageUrl;
+    figureImg.alt = work.title;
+    figureImg.classList.add("galleryImage");
 
-        const figureCap = document.createElement("figcaption");
-        figureCap.innerHTML = work.title;
-        figureCap.classList.add("figCaption");
+    const figureCap = document.createElement("figcaption");
+    figureCap.innerHTML = work.title;
+    figureCap.classList.add("figCaption");
 
-        figure.setAttribute("data-id", work.id);
-        figure.setAttribute("category-id", work.categoryId);
+    figure.setAttribute("data-id", work.id);
+    figure.setAttribute("category-id", work.categoryId);
 
-        figure.appendChild(figureImg);
-        figure.appendChild(figureCap);
+    figure.appendChild(figureImg);
+    figure.appendChild(figureCap);
 
-        gallery.appendChild(figure);
+    gallery.appendChild(figure);
     })
 }
 
@@ -59,9 +59,8 @@ function createFiltersBtns() {
         const lineBreak = document.createElement("br");
 
         filters.appendChild(filterBtn);
-        filters.appendChild(lineBreak)
+        filters.appendChild(lineBreak);
     }
-
 }
 createFiltersBtns();
 
@@ -69,12 +68,10 @@ createFiltersBtns();
 const listFilters = document.querySelectorAll(".btn");
 
 function addFilterBtnTxt() {
-
     listFilters[0].textContent = "Tous";
     listFilters[1].textContent = "Objets";
     listFilters[2].textContent = "Appartements";
     listFilters[3].textContent = "Hôtels & restaurants";
-
 }
 addFilterBtnTxt();
 
@@ -93,11 +90,8 @@ function filteredItems() {
 
     works.forEach((work) => {
         const categoryId = work.getAttribute("category-id");
-        if (categoryId === "1") {
-            work.style.display = "block";
-        } else {
-            work.style.display = "none";
-        }
+        if (categoryId === "1") return work.style.display = "block";
+        return work.style.display = "none";
     });
 }
 const btnItems = document.querySelector(".btn-items");
@@ -109,11 +103,8 @@ function filteredApartments() {
 
     works.forEach((work) => {
         const categoryId = work.getAttribute("category-id");
-        if (categoryId === "2") {
-            work.style.display = "block";
-        } else {
-            work.style.display = "none";
-        }
+        if (categoryId === "2") return work.style.display = "block";
+        return work.style.display = "none";
     });
 }
 const btnApartments = document.querySelector(".btn-apartments");
@@ -125,11 +116,8 @@ function filteredHotels() {
 
     works.forEach((work) => {
         const categoryId = work.getAttribute("category-id");
-        if (categoryId === "3") {
-            work.style.display = "block";
-        } else {
-            work.style.display = "none";
-        }
+        if (categoryId === "3") return work.style.display = "block";
+        return work.style.display = "none";
     });
 }
 const btnHotels = document.querySelector(".btn-hotels");
@@ -144,7 +132,6 @@ function noFilter() {
 }
 const btnAll = document.querySelector(".btn-all");
 btnAll.addEventListener("click", noFilter);
-
 
 // Changement aspect des boutons filtre au click
 const filterBtns = document.querySelectorAll(".filters .btn");
@@ -162,9 +149,7 @@ window.addEventListener("load", defaultFilter);
 
 //Modification style des filtres après sélection
 filterBtns.forEach((filterBtn) => {
-
     filterBtn.addEventListener("click", () => {
-
         filterBtns[0].classList.remove("btn_selected");
         if (i === 1) return filterBtn.classList.add("btn_selected");
 
@@ -188,15 +173,12 @@ const handleLogout = () => {
 const logoutButton = document.querySelector(".logout");
 logoutButton.addEventListener("click", handleLogout);
 
-
-
 //Comportement de Homepage après connexion administrateur
 const loginStatus = document.querySelector(".login");
 const logoutStatus = document.querySelector(".logout");
 const editModeBar = document.getElementById("admin-mode-bar");
 const editModeButton = document.querySelector(".portfolioButton");
 const editModeFilter = document.querySelector(".filters");
-
 
 if (JSON.parse(sessionStorage.getItem("isLogged"))) {
     loginStatus.style.display = "none";
@@ -214,7 +196,6 @@ if (JSON.parse(sessionStorage.getItem("isLogged"))) {
     editModeFilter.style.display = "flex";
     modalGallery.style.display = "none";
     modalPhoto.style.display = "none";
-
 }
 
 

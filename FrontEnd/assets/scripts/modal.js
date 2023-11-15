@@ -94,8 +94,6 @@ function addModalFigure(works) {
             e.stopPropagation();
             deleteWork(work.id);
         });
-
-        return figure;
     })
 }
 
@@ -171,12 +169,12 @@ function checkTitleLength() {
 
 function checkCategory() {
     if(category.selectedIndex !== 0) return true;
-        return false
+    return false
 }
 
 function checkImage() {
     if(previewImage.style.display !== "none") return true;
-        return false;
+    return false;
 }
 
 const activateSubmitButton = (e)=> {
@@ -195,24 +193,24 @@ modalPhotoForm.category.addEventListener("click", stopPropagation);
 // Ajouter un nouveau projet
 function createGalleryWork(work) {
     const figure = document.createElement("figure");
-        figure.classList.add("project");
+    figure.classList.add("project");
 
-        const figureImg = document.createElement("img")
-        figureImg.src = work.imageUrl;
-        figureImg.alt = work.title;
-        figureImg.classList.add("galleryImage");
+    const figureImg = document.createElement("img")
+    figureImg.src = work.imageUrl;
+    figureImg.alt = work.title;
+    figureImg.classList.add("galleryImage");
 
-        const figureCap = document.createElement("figcaption");
-        figureCap.innerHTML = work.title;
-        figureCap.classList.add("figCaption");
+    const figureCap = document.createElement("figcaption");
+    figureCap.innerHTML = work.title;
+    figureCap.classList.add("figCaption");
 
-        figure.setAttribute("data-id", work.id);
-        figure.setAttribute("category-id", work.categoryId);
+    figure.setAttribute("data-id", work.id);
+    figure.setAttribute("category-id", work.categoryId);
 
-        figure.appendChild(figureImg);
-        figure.appendChild(figureCap);
+    figure.appendChild(figureImg);
+    figure.appendChild(figureCap);
 
-        gallery.appendChild(figure);
+    gallery.appendChild(figure);
 }
 
 function createModalWork(work) {
@@ -247,7 +245,6 @@ function createModalWork(work) {
         e.stopPropagation();
         deleteWork(work.id);
     });
-    return figure;
 }
 
 const addNewWork = (e)=> {
@@ -288,7 +285,10 @@ const submitForm = document.getElementById("submitBtn");
 submitForm.addEventListener("click", addNewWork);
 
 const myForm = document.querySelector(".modalPhotoForm");
-const handleForm = (e) => {e.preventDefault();}
+const handleForm = (e) => {
+    e.preventDefault();
+    myForm.reset();
+};
 myForm.addEventListener("submit", handleForm);
 
 // Ajout image preview
@@ -302,12 +302,12 @@ inputFile.addEventListener("change", ()=> {
 
     const previewImage = document.getElementById("previewImage");
 
-        previewImage.src = URL.createObjectURL(selectedImage);
-        previewImage.style.display = "block";
+    previewImage.src = URL.createObjectURL(selectedImage);
+    previewImage.style.display = "block";
 
-        pTag.style.display = "none";
-        labelTag.style.display = "none";
-        iconInput.style.display = "none";
+    pTag.style.display = "none";
+    labelTag.style.display = "none";
+    iconInput.style.display = "none";
 });
 
 //Retourner à la modale galérie
