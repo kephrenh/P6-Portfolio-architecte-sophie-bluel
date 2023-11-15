@@ -1,4 +1,7 @@
-// Ouvrir modale galérie
+const focusableSelector = "button, a, input, textarea";
+let focusables = [];
+
+// Ouvrir modale gallérie
 const modalGallery = document.getElementById("modalGallery");
 const openModalGalleryBtn = document.getElementById("openModalGallery");
 
@@ -13,7 +16,7 @@ openModalGalleryBtn.addEventListener("click", (e)=> {
     modalGallery.setAttribute("aria-modal", "true");
 })
 
-// Fermer modale galérie
+// Fermer modale gallérie
 const closeModalGalleryBtn = document.querySelector(".closeModalGallery");
 
 closeModalGalleryBtn.addEventListener("click", (e)=> {
@@ -27,7 +30,7 @@ closeModalGalleryBtn.addEventListener("click", (e)=> {
 
 })
 
-// Fermeture modale photo avec un clic en dehors de la modale
+// Fermeture modale gallérie avec un clic en dehors de la modale
 modalGallery.addEventListener("click", (e) => {
     e.stopPropagation();
     e.preventDefault();
@@ -50,7 +53,7 @@ modalGallery.addEventListener("click", (e) => {
     e.stopPropagation();
   }
 
-// Ajouter les travaux à la modale galérie
+// Ajouter les travaux à la modale gallérie
 const galleryModal = document.querySelector(".galleryModal");
 let urlWorks = "http://www.localhost:5678/api/works";
 
@@ -132,46 +135,60 @@ const openModalPhotoBtn = document.getElementById("addPhotoButton");
 openModalPhotoBtn.addEventListener("click", (e)=> {
     e.preventDefault();
     e.stopPropagation();
-    modalPhoto.showModal();
-    modalGallery.close(); 
 
+    // Ouvrir modale photo
+    modalPhoto.showModal(); 
     modalPhoto.style.display = "flex";
+    modalPhoto.removeAttribute("aria-hidden");
+    modalPhoto.setAttribute("aria-modal", "true");
+
+    // Fermer modale gallérie
+    modalGallery.close();   
     modalGallery.style.display = "none";
     modalGallery.setAttribute("aria-hidden", "true");
     modalGallery.removeAttribute("aria-modal");
 
-    modalPhoto.removeAttribute("aria-hidden");
-    modalPhoto.setAttribute("aria-modal", "true");
-
+    // Cacher aperçu image
     previewImage.style.display = "none"
+
+    // Afficher les autres éléments de modalPhotoMain
     pTag.style.display = "initial";
     labelTag.style.display = "initial";
     iconInput.style.display = "initial";
 
+    // Effacer le contenu de l'input titre à l'ouverture de la modale
     inputTitle.value = "";
-    category.selectedIndex = 0;
+
+    // Afficher message remplissage de tous les champs
+    let message = document.querySelector(".modalPhotoMessage");
+    message.style.visibility = "visible";
+    message.innerHTML = "*Veuillez remplir tous les champs."
 })
 
 // Activation bouton Valider
 const modalPhotoForm = document.querySelector(".modalPhotoForm");
 const submitBtn = document.getElementById("submitBtn");
 
+// Désactiver bouton submit du formulaire
 submitBtn.disabled = true;
 submitBtn.ariaDisabled = true;
 
 const inputTitle = document.getElementById("title");
 const category = document.getElementById("category");
 
+// Valider le champ titre
 function checkTitleLength() {    
     if(inputTitle.value.length > 0) return true;
     return false;
 }
 
+// Valider le champ catégorie
 function checkCategory() {
     if(category.selectedIndex !== 0) return true;
     return false
 }
 
+// Valider le champ aperçu de l'image
 function checkImage() {
     if(previewImage.style.display !== "none") return true;
     return false;
@@ -179,16 +196,24 @@ function checkImage() {
 
 const activateSubmitButton = (e)=> {
     e.preventDefault();
+    let message = document.querySelector(".modalPhotoMessage");
+
     if(checkTitleLength() && checkCategory() && checkImage()) {
+        // Bouton du formulaire activé
         submitBtn.disabled = false;
         submitBtn.ariaDisabled = false;
+        message.style.visibility = "hidden"; //Cacher le message de remplissage des champs
     } else {
+        // Bouton du formulaire désactivé
         submitBtn.disabled = true;
         submitBtn.ariaDisabled = true;
+        message.style.visibility = "visible";   //Afficher le message de remplissage des champs
     }
 }
 modalPhotoForm.addEventListener("change", activateSubmitButton);
 modalPhotoForm.category.addEventListener("click", stopPropagation);
+
+
 
 // Ajouter un nouveau projet
 function createGalleryWork(work) {
@@ -310,7 +335,7 @@ inputFile.addEventListener("change", ()=> {
     iconInput.style.display = "none";
 });
 
-//Retourner à la modale galérie
+//Retourner à la modale gallérie
 const backModalGalleryBtn = document.querySelector(".backModalGallery");
 
 backModalGalleryBtn.addEventListener("click", (e)=> {

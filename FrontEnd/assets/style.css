@@ -63,6 +63,10 @@ body {
 * {
 	box-sizing: border-box;
 }
+
+*:focus {
+	box-shadow: 0 0 10px blue;
+}
 header {
 	display: flex;
 	justify-content: space-between;
@@ -646,8 +650,19 @@ footer nav ul {
 
 .modalPhotoLine {
 	width: 430px;
-	border-top: 1px solid #b3b3b3;
+	border-bottom: 1px solid #b3b3b3;
 	margin: 47px 0 0 0;
+}
+
+.modalPhotoMessage {
+	margin: 5px;
+	color: red;
+	font-family: Work Sans;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+
 }
 
 #submitBtn:disabled {
