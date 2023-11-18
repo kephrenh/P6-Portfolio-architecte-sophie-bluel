@@ -272,6 +272,7 @@ function createModalWork(work) {
         e.preventDefault();
         e.stopPropagation();
         deleteWork(work.id);
+        location.reload();
     });
 }
 
@@ -309,8 +310,10 @@ const addNewWork = (e)=> {
         inputs.forEach((input) => {
             input.value = "";
         })
-        const imagePreview = getElementById("previewImage");
-        imagePreview.src = "";
+        const resetSelect = document.getElementById("category");
+        resetSelect.selectedIndex = 0;
+        const resetPreview = getElementById("previewImage");
+        resetPreview.src = "";
         alert("Nouveau projet ajouté avec succès")
     })
     .catch(err => console.error(err));
