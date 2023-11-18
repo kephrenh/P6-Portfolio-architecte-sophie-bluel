@@ -305,15 +305,8 @@ const addNewWork = (e)=> {
     .then(json => {
         createGalleryWork(json);
         createModalWork(json);
+        window.location.reload();
         modalPhoto.style.display = "flex";
-        const inputs = document.querySelectorAll("input");
-        inputs.forEach((input) => {
-            input.value = "";
-        })
-        const resetSelect = document.getElementById("category");
-        resetSelect.selectedIndex = 0;
-        const resetPreview = getElementById("previewImage");
-        resetPreview.src = "";
         alert("Nouveau projet ajouté avec succès")
     })
     .catch(err => console.error(err));
