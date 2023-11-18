@@ -64,9 +64,6 @@ body {
 	box-sizing: border-box;
 }
 
-*:focus {
-	box-shadow: 0 0 10px blue;
-}
 header {
 	display: flex;
 	justify-content: space-between;

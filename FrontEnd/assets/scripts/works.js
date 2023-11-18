@@ -16,29 +16,33 @@ function getWorks(works) {
 
     works.forEach((work) => {
 
+    // Créer balise figure
     const figure = document.createElement("figure");
     figure.classList.add("project");
+    figure.setAttribute("data-id", work.id);
+    figure.setAttribute("category-id", work.categoryId);
 
+    // Créer balise image
     const figureImg = document.createElement("img")
     figureImg.src = work.imageUrl;
     figureImg.alt = work.title;
     figureImg.classList.add("galleryImage");
 
+    // Créer balise figcaption
     const figureCap = document.createElement("figcaption");
     figureCap.innerHTML = work.title;
     figureCap.classList.add("figCaption");
 
-    figure.setAttribute("data-id", work.id);
-    figure.setAttribute("category-id", work.categoryId);
-
+    // Intégrer img et figcaption à figure
     figure.appendChild(figureImg);
     figure.appendChild(figureCap);
 
+    // Intégrer figure à la gallérie
     gallery.appendChild(figure);
     })
 }
 
-// Création de la div contenant les boutons
+// Intégration section Filtres
 function createFiltersDiv() {
     let filters = document.createElement("div");
     filters.classList.add("filters");
@@ -47,7 +51,7 @@ function createFiltersDiv() {
 }
 createFiltersDiv();
 
-// Création et ajout des boutons
+// Créer et ajouter les boutons filtre
 function createFiltersBtns() {
 
     for (let i = 0; i < 4; i++) {
@@ -64,7 +68,7 @@ function createFiltersBtns() {
 }
 createFiltersBtns();
 
-// Ajout de texte aux boutons
+// Ajouter le texte des filtres
 const listFilters = document.querySelectorAll(".btn");
 
 function addFilterBtnTxt() {
@@ -75,7 +79,7 @@ function addFilterBtnTxt() {
 }
 addFilterBtnTxt();
 
-// Ajout de classe aux boutons
+// Ajouter la classe des filtres
 function addFilterBtnClass() {
     listFilters[0].classList.add("btn-all");
     listFilters[1].classList.add("btn-items");
@@ -87,11 +91,10 @@ addFilterBtnClass();
 // Ajout filtre objets
 function filteredItems() {
     const works = document.querySelectorAll(".project");
-
-    works.forEach((work) => {
+    works.forEach((work) => {                                           // Boucle forEach pour prendre chaque élément de la gallérie
         const categoryId = work.getAttribute("category-id");
-        if (categoryId === "1") return work.style.display = "block";
-        return work.style.display = "none";
+        if (categoryId === "1") return work.style.display = "block";    // Afficher Objets
+        return work.style.display = "none";                             // Masquer les autres éléments
     });
 }
 const btnItems = document.querySelector(".btn-items");
@@ -103,8 +106,8 @@ function filteredApartments() {
 
     works.forEach((work) => {
         const categoryId = work.getAttribute("category-id");
-        if (categoryId === "2") return work.style.display = "block";
-        return work.style.display = "none";
+        if (categoryId === "2") return work.style.display = "block";    // Afficher Appartements
+        return work.style.display = "none";                             //  Masquer les autres éléments
     });
 }
 const btnApartments = document.querySelector(".btn-apartments");
@@ -116,8 +119,8 @@ function filteredHotels() {
 
     works.forEach((work) => {
         const categoryId = work.getAttribute("category-id");
-        if (categoryId === "3") return work.style.display = "block";
-        return work.style.display = "none";
+        if (categoryId === "3") return work.style.display = "block";    // Afficher Hôtels & restaurants
+        return work.style.display = "none";                             // Masquer les autres éléments
     });
 }
 const btnHotels = document.querySelector(".btn-hotels");
@@ -127,7 +130,7 @@ btnHotels.addEventListener("click", filteredHotels);
 function noFilter() {
     const works = document.querySelectorAll(".project");
     works.forEach((work) => {
-        work.style.display = "block";
+        work.style.display = "block";       // Afficher tous les travaux
     });
 }
 const btnAll = document.querySelector(".btn-all");
@@ -144,58 +147,58 @@ function defaultFilter() {
     filterBtns[0].classList.add("btn_selected");
 }
 
-window.addEventListener("load", noFilter);
-window.addEventListener("load", defaultFilter);
+//Filtre Tous sélectionné par défaut au chargement de la page
+window.addEventListener("load", noFilter);  
+window.addEventListener("load", defaultFilter);     
+
 
 //Modification style des filtres après sélection
 filterBtns.forEach((filterBtn) => {
     filterBtn.addEventListener("click", () => {
-        filterBtns[0].classList.remove("btn_selected");
-        if (i === 1) return filterBtn.classList.add("btn_selected");
-
-        filterBtns[1].classList.remove("btn_selected");
-        if (i === 2) return filterBtn.classList.add("btn_selected");
-
-        filterBtns[2].classList.remove("btn_selected");
-        if (i === 3) return filterBtn.classList.add("btn_selected");
-
-        filterBtns[3].classList.remove("btn_selected");
-        if (i === 0) return filterBtn.classList.add("btn_selected");
+        for(let i = 0; i < filterBtns.length; i++) {
+            filterBtns[i].classList.remove("btn_selected");     // Retirer la classe btn_selected de tous les boutons
+        }
+        filterBtn.classList.add("btn_selected");                // Ajouter la classe btn_selected au bouton
     })
 })
 
+
 // Logout
 const handleLogout = () => {
-    window.sessionStorage.clear();
-    window.location.reload(true);
+    window.sessionStorage.clear();      // Vider session storage
+    window.location.reload(true);       // Actualiser la page
     window.location.replace('/');
   };
 const logoutButton = document.querySelector(".logout");
 logoutButton.addEventListener("click", handleLogout);
 
-//Comportement de Homepage après connexion administrateur
+//Gestion Homepage connexion/hors connextion
 const loginStatus = document.querySelector(".login");
 const logoutStatus = document.querySelector(".logout");
 const editModeBar = document.getElementById("admin-mode-bar");
 const editModeButton = document.querySelector(".portfolioButton");
 const editModeFilter = document.querySelector(".filters");
+const portfolioHeader = document.querySelector(".portfolio-header");
 
 if (JSON.parse(sessionStorage.getItem("isLogged"))) {
-    loginStatus.style.display = "none";
-    logoutStatus.style.display = "initial";
-    editModeBar.style.display = "flex";
-    editModeButton.style.display = "flex";
-    editModeFilter.style.display = "none";
-    modalGallery.style.display = "none";
-    modalPhoto.style.display = "none";
+    // Utilisateur connecté
+    loginStatus.style.display = "none";             // login masqué
+    logoutStatus.style.display = "initial";         // logout affiché
+    editModeBar.style.display = "flex";             // Barre "Mode édition" affiché
+    editModeButton.style.display = "flex";          // Bouton "modifier" affiché
+    editModeFilter.style.display = "none";          // Filtres masqués
+    portfolioHeader.style.marginBottom = "75px";    // Augmenter margin bottom 
+    modalGallery.style.display = "none";            // Modale gallérie masquée
+    modalPhoto.style.display = "none";              // Modale ajout photo masquée
 } else {
-    loginStatus.style.display = "initial";
-    logoutStatus.style.display = "none";
-    editModeBar.style.display = "none";
-    editModeButton.style.display = "none";
-    editModeFilter.style.display = "flex";
-    modalGallery.style.display = "none";
-    modalPhoto.style.display = "none";
+    // Utilisateur déconnecté
+    loginStatus.style.display = "initial";          // login affiché
+    logoutStatus.style.display = "none";            // logout masqué
+    editModeBar.style.display = "none";             // Barre "Mode édition" masqué
+    editModeButton.style.display = "none";          // Bouton "modifier" masqué
+    editModeFilter.style.display = "flex";          // Filtres affichés
+    modalGallery.style.display = "none";            // Modale gallérie cachée
+    modalPhoto.style.display = "none";              // Modale ajout photo cachée
 }
 
 

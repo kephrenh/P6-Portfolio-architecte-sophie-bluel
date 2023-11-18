@@ -1,6 +1,3 @@
-const focusableSelector = "button, a, input, textarea";
-let focusables = [];
-
 // Ouvrir modale gallérie
 const modalGallery = document.getElementById("modalGallery");
 const openModalGalleryBtn = document.getElementById("openModalGallery");
@@ -65,33 +62,39 @@ fetch(urlWorks)
 function addModalFigure(works) {
 
     works.forEach((work) => {
-
+        // Créer balise figure
         const figure = document.createElement("figure");
         figure.classList.add("modalFigure");
+        figure.setAttribute("data-id", work.id);
+        figure.setAttribute("category-id", work.categoryId);
 
+        // Créer balise img
         const figureImg = document.createElement("img")
         figureImg.src = work.imageUrl;
         figureImg.alt = work.title;
         figureImg.classList.add("modalImage");
 
+        // Créer balise button
         const trashButton = document.createElement("button")
         trashButton.classList.add("trash-button");
 
+        // Créer balise i
         const trashIcon = document.createElement("i");
         trashIcon.classList.add("fa-solid");
         trashIcon.classList.add("fa-trash-can");
         trashIcon.classList.add("trash-icon");
 
+        // Intégrer balise i dans balise button
         trashButton.appendChild(trashIcon);
 
-        figure.setAttribute("data-id", work.id);
-        figure.setAttribute("category-id", work.categoryId);
-
+        // Intégrer balises img and button dans balise figure
         figure.appendChild(figureImg);
         figure.appendChild(trashButton);
 
+        // Intégrer balise figure dans la balise "div class=galleryModal"
         galleryModal.appendChild(figure);
 
+        // Ajouter Event Listener à trashButton pour supprimer les travaux
         trashButton.addEventListener("click", (e)=> {
             e.preventDefault();
             e.stopPropagation();
@@ -162,7 +165,10 @@ openModalPhotoBtn.addEventListener("click", (e)=> {
     // Afficher message remplissage de tous les champs
     let message = document.querySelector(".modalPhotoMessage");
     message.style.visibility = "visible";
-    message.innerHTML = "*Veuillez remplir tous les champs."
+    message.innerHTML = "*Veuillez remplir tous les champs du formulaire.";
+
+    let myForm = document.querySelector(".modalPhotoForm");
+    myForm.reset();
 })
 
 // Activation bouton Valider
@@ -202,18 +208,16 @@ const activateSubmitButton = (e)=> {
         // Bouton du formulaire activé
         submitBtn.disabled = false;
         submitBtn.ariaDisabled = false;
-        message.style.visibility = "hidden"; //Cacher le message de remplissage des champs
+        message.style.visibility = "hidden";    // Cacher le message de remplissage des champs
     } else {
         // Bouton du formulaire désactivé
         submitBtn.disabled = true;
         submitBtn.ariaDisabled = true;
-        message.style.visibility = "visible";   //Afficher le message de remplissage des champs
+        message.style.visibility = "visible";   // Afficher le message de remplissage des champs
     }
 }
 modalPhotoForm.addEventListener("change", activateSubmitButton);
 modalPhotoForm.category.addEventListener("click", stopPropagation);
-
-
 
 // Ajouter un nouveau projet
 function createGalleryWork(work) {
@@ -241,6 +245,8 @@ function createGalleryWork(work) {
 function createModalWork(work) {
     const figure = document.createElement("figure");
     figure.classList.add("modalFigure");
+    figure.setAttribute("data-id", work.id);
+    figure.setAttribute("category-id", work.categoryId);
 
     const figureImg = document.createElement("img")
     figureImg.src = work.imageUrl;
@@ -256,9 +262,6 @@ function createModalWork(work) {
     trashIcon.classList.add("trash-icon");
 
     trashButton.appendChild(trashIcon);
-
-    figure.setAttribute("data-id", work.id);
-    figure.setAttribute("category-id", work.categoryId);
 
     figure.appendChild(figureImg);
     figure.appendChild(trashButton);
@@ -304,7 +307,7 @@ const addNewWork = (e)=> {
         modalPhoto.style.display = "flex";
         alert("Nouveau projet ajouté avec succès")
     })
-    .catch(error => console.error(error));
+    .catch(err => console.error(err));
 }
 const submitForm = document.getElementById("submitBtn");
 submitForm.addEventListener("click", addNewWork);
