@@ -305,19 +305,14 @@ const addNewWork = (e)=> {
         createGalleryWork(json);
         createModalWork(json);
         modalPhoto.style.display = "flex";
+        const myForm = document.querySelector(".modalPhotoForm");
+        myForm.reset();
         alert("Nouveau projet ajouté avec succès")
     })
     .catch(err => console.error(err));
 }
 const submitForm = document.getElementById("submitBtn");
 submitForm.addEventListener("click", addNewWork);
-
-const myForm = document.querySelector(".modalPhotoForm");
-const handleForm = (e) => {
-    e.preventDefault();
-    myForm.reset();
-};
-myForm.addEventListener("submit", handleForm);
 
 // Ajout image preview
 const inputFile = document.getElementById("image");
