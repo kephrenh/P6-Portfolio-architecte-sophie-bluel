@@ -305,7 +305,7 @@ const addNewWork = (e)=> {
         createGalleryWork(json);
         createModalWork(json);
         modalPhoto.style.display = "flex";
-        const inputs = document.querySelectorAll("input");
+        const inputs = document.querySelectorAll("input, #previewImage");
         inputs.forEach((input) => {
             input.value = "";
         })
