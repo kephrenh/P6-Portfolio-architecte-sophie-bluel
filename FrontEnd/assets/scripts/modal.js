@@ -305,8 +305,10 @@ const addNewWork = (e)=> {
         createGalleryWork(json);
         createModalWork(json);
         modalPhoto.style.display = "flex";
-        const myForm = document.querySelector(".modalPhotoForm");
-        myForm.reset();
+        const inputs = document.querySelectorAll("input");
+        inputs.forEach((input) => {
+            input.value = "";
+        })
         alert("Nouveau projet ajouté avec succès")
     })
     .catch(err => console.error(err));
