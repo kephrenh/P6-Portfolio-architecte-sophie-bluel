@@ -305,8 +305,6 @@ const addNewWork = (e)=> {
     .then(json => {
         createGalleryWork(json);
         createModalWork(json);
-        // window.location.reload();
-        // modalPhoto.style.display = "flex";
         alert("Nouveau projet ajouté avec succès")
     })
     .catch(err => console.error(err));
